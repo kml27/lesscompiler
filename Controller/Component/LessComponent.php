@@ -155,17 +155,17 @@ class LessComponent extends Component {
  * @return void
  */
 	protected function _checkVersion() {
-		if (PHP_VERSION < self::$_minVersionPHP) {
+		if (version_compare(PHP_VERSION, self::$_minVersionPHP) < 0) {
 			throw new CakeException(__('The LessCompiler plugin requires PHP version %s or higher!', self::$_minVersionPHP));
 		}
 
-		if (Configure::version() < self::$_minVersionCakePHP) {
+		if (version_compare(Configure::version(), self::$_minVersionCakePHP) < 0) {
 			throw new CakeException(__('The LessCompiler plugin requires CakePHP version %s or higher!', self::$_minVersionCakePHP));
 		}
 
 		$lessc = new LessCompiler();
 
-		if ($lessc::$VERSION < self::$_minVersionLessc) {
+		if (version_compare($lessc::$VERSION, self::$_minVersionLessc) < 0) {
 			throw new CakeException(__('The LessCompiler plugin requires lessc version %s or higher!', self::$_minVersionLessc));
 		}
 
